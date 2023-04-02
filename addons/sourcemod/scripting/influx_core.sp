@@ -2978,6 +2978,9 @@ stock void RemoveRunById( int runid, int client = 0 )
     
     
     Inf_ReplyToClient( client, "%T", "INF_RUN_DELETED", client, szRun );
+
+
+    LogMessage( INF_CON_PRE..."%L delete a runid %i in mapid %i.", client, Influx_GetCurrentMapId() );
 }
 
 stock void TeleportClientsOutOfRun( int runid )

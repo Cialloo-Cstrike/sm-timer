@@ -716,6 +716,8 @@ stock void DeleteZoneWithClient( int client, int index )
     if ( DeleteZoneByIndex( index ) )
     {
         Influx_PrintToChat( _, client, "Deleted {MAINCLR1}%s{CHATCLR}!", szZone );
+
+        LogMessage( INF_CON_PRE..."%L delete zoneid %i in mapid %i.", client, index, Influx_GetCurrentMapId() );
     }
     else
     {
