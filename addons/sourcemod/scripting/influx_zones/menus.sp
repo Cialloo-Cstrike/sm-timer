@@ -62,7 +62,7 @@ public Action Cmd_SaveZones( int client, int args )
         Inf_ReplyToClient( client, "Wrote {MAINCLR1}%i{CHATCLR} zones to file/database!", num );
 
 
-        LogMessage( INF_CON_PRE..."%L has saved zone in mapid %i.", client, Influx_GetCurrentMapId() );
+        Cialloo_LogMessage( INF_CON_PRE..."%L has saved zone in mapid %i.", client, Influx_GetCurrentMapId() );
     }
     
     return Plugin_Handled;

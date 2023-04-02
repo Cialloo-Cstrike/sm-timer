@@ -401,5 +401,5 @@ stock void DB_DeleteCPRecords( int issuer, int mapid, int uid = -1, int runid = 
     SQL_TQuery( db, Thrd_Empty, szQuery, issuer ? GetClientUserId( issuer ) : 0, DBPrio_High );
 
 
-    LogMessage( INF_CON_PRE..."%L delete a check point record in mapid: %i.", issuer, mapid );
+    Cialloo_LogMessage( INF_CON_PRE..."%L delete a check point record in mapid: %i.", issuer, mapid );
 }
