@@ -22,9 +22,9 @@
 #define INF_PRIVCOM_CUSTOMRANK          "sm_inf_customrank"
 #define INF_PRIVCOM_MAPREWARD           "sm_inf_setmapreward"
 
-#define INF_TABLE_SIMPLERANKS           "inf_simpleranks"
-#define INF_TABLE_SIMPLERANKS_HISTORY   "inf_simpleranks_history"
-#define INF_TABLE_SIMPLERANKS_MAPS      "inf_simpleranks_maps"
+#define INF_TABLE_SIMPLERANKS           "66tick_simpleranks"
+#define INF_TABLE_SIMPLERANKS_HISTORY   "66tick_simpleranks_history"
+#define INF_TABLE_SIMPLERANKS_MAPS      "66tick_simpleranks_maps"
 
 
 #define RANK_FILE_NAME                  "influx_simpleranks.cfg"

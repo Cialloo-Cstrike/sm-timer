@@ -7,7 +7,7 @@
 #define INFLUX_LIB_ZONES_CP         "influx_zones_checkpoint"
 
 
-#define INF_TABLE_CPTIMES           "inf_cptimes"
+#define INF_TABLE_CPTIMES           "66tick_cptimes"
 
 
 #define MAX_CP_NAME                 32
