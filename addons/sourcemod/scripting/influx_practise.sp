@@ -112,6 +112,9 @@ public void OnPluginStart()
     RegConsoleCmd( "sm_addcp", Cmd_AddCP );
     RegConsoleCmd( "sm_lastcreatedcp", Cmd_LastCreatedCP );
     RegConsoleCmd( "sm_lastusedcp", Cmd_LastUsedCP );
+    RegConsoleCmd( "sm_lastusedpreviouscp", Cmd_LastUsedPreviousCP );
+    RegConsoleCmd( "sm_lastusedprecp", Cmd_LastUsedPreviousCP );
+    RegConsoleCmd( "sm_lastusednextcp", Cmd_LastUsedNextCP );
     RegConsoleCmd( "sm_pracsettings", Cmd_CPSettings );
     RegConsoleCmd( "sm_cpsettings", Cmd_CPSettings );
     
@@ -180,7 +183,7 @@ public Action Cmd_Practise( int client, int args )
     {
         if(StartPractising( client ))
         {
-        FakeClientCommand( client, "sm_pracmenu" );
+            FakeClientCommand( client, "sm_pracmenu" );
         }
     }
     else
@@ -223,6 +226,38 @@ public Action Cmd_LastUsedCP( int client, int args )
     return Plugin_Handled;
 }
 
+public Action Cmd_LastUsedPreviousCP( int client, int args )
+{
+    if ( !client ) return Plugin_Handled;
+    
+    if ( !g_bPractising[client] )
+    {
+        Influx_PrintToChat( _, client, "%T", "INF_MUSTBEPRACTISING", client );
+        return Plugin_Handled;
+    }
+    
+    
+    TeleportClientToLastUsedPreviousCP( client );
+    
+    return Plugin_Handled;
+}
+
+public Action Cmd_LastUsedNextCP( int client, int args )
+{
+    if ( !client ) return Plugin_Handled;
+    
+    if ( !g_bPractising[client] )
+    {
+        Influx_PrintToChat( _, client, "%T", "INF_MUSTBEPRACTISING", client );
+        return Plugin_Handled;
+    }
+    
+    
+    TeleportClientToLastUsedNextCP( client );
+    
+    return Plugin_Handled;
+}
+
 public Action Cmd_LastCreatedCP( int client, int args )
 {
     if ( !client ) return Plugin_Handled;
@@ -254,6 +289,8 @@ public Action Cmd_CPMenu( int client, int args )
     
     menu.AddItem( "-3", "Last created (sm_lastcreatedcp)" );
     menu.AddItem( "-2", "Last used (sm_lastusedcp)", ( g_iLastUsed[client] != -1 ) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED );
+    menu.AddItem( "-4", "Previous used (sm_lastusedprecp)", ( g_iLastUsed[client] != -1 ) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED );
+    menu.AddItem( "-5", "Next used (sm_lastusednextcp)", ( g_iLastUsed[client] != -1 ) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED );
     menu.AddItem( "-1", "Add CP (sm_addcp)\n " );
     menu.AddItem( "0", "Settings\n " );
     
@@ -308,6 +345,14 @@ public int Hndlr_CP( Menu menu, MenuAction action, int client, int menuindex )
     
     switch ( id )
     {
+        case -5 :
+        {
+            TeleportClientToLastUsedNextCP( client );
+        }
+        case -4 :
+        {
+            TeleportClientToLastUsedPreviousCP( client );
+        }
         case -3 :
         {
             TeleportClientToLastCreatedCP( client );
@@ -445,7 +490,42 @@ public int Hndlr_Settings( Menu menu, MenuAction action, int client, int index )
 
 stock bool TeleportClientToLastUsedCP( int client )
 {
+    if( g_iLastUsed[client] == -1 ) return false;
+
     int index = g_iLastUsed[client];
+    
+    if ( g_hPrac[client].Get( index, view_as<int>( PRAC_ID ) ) > 0 )
+    {
+        return TeleportClientToCP( client, index );
+    }
+    
+    return false;
+}
+
+stock bool TeleportClientToLastUsedPreviousCP( int client )
+{
+    if( g_iLastUsed[client]  < 1 ) return false;
+
+    int index = g_iLastUsed[client] - 1;
+    
+    if ( g_hPrac[client].Get( index, view_as<int>( PRAC_ID ) ) > 0 )
+    {
+        return TeleportClientToCP( client, index );
+    }
+    
+    return false;
+}
+
+stock bool TeleportClientToLastUsedNextCP( int client )
+{
+    if( g_iLastUsed[client] == -1 ) return false;
+
+    int index;
+
+    if( g_iLastUsed[client] == g_iCurIndex[client] - 1 )
+        index = g_iCurIndex[client] - 1;
+    else
+        index = g_iLastUsed[client] + 1;
     
     if ( g_hPrac[client].Get( index, view_as<int>( PRAC_ID ) ) > 0 )
     {
@@ -577,7 +657,11 @@ stock bool StartPractising( int client )
     {
         return false;
     }
-    
+
+    if ( g_bLib_Pause && Influx_GetClientState( client ) == STATE_RUNNING &&  !Influx_IsClientPaused( client ) )
+    {
+        Influx_PauseClientRun( client );
+    }
     
     g_bPractising[client] = true;
     
