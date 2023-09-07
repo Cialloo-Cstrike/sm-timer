@@ -52,9 +52,10 @@ public void Thrd_GetMapIdAndTier( Handle db, Handle res, const char[] szError, a
     {
         g_iCurMapId = SQL_FetchInt( res, 0 );
         g_iCurMapTier = SQL_FetchInt( res, 1 );
+        g_iCurMapMaxVelocity = SQL_FetchInt( res, 2 );
         
         // We've retrieved the map id and map tier, send forward.
-        PrintToServer( INF_CON_PRE..."Retrieved map id %i, map tier %i", g_iCurMapId, g_iCurMapTier );
+        PrintToServer( INF_CON_PRE..."Retrieved map id %i, map tier %i, maxvelocity %i", g_iCurMapId, g_iCurMapTier, g_iCurMapMaxVelocity );
         
         SendMapIdRetrieved();
     }

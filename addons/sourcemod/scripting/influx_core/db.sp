@@ -233,6 +233,15 @@ stock bool DB_PerformUpdateQueries( int ver )
         
         
         PrintToServer( "Add maptier column to %s", INF_TABLE_MAPS );
+
+
+        FormatEx( szQuery, sizeof( szQuery ), 
+            "ALTER TABLE "...INF_TABLE_MAPS..." ADD COLUMN maxvelocity INT DEFAULT 3500;" );
+
+        if ( !DB_UpdateQuery( ver, szQuery ) ) return false;
+
+
+        PrintToServer( "Add maxvelocity column to %s", INF_TABLE_MAPS );
         
         
         FormatEx( szQuery, sizeof( szQuery ), "REPLACE INTO "...INF_TABLE_DBVER..." (id,version) VALUES (0,%i)", INF_DB_CURVERSION );
@@ -251,7 +260,7 @@ stock bool DB_PerformUpdateQueries( int ver )
 stock void DB_InitMap()
 {
     decl String:szQuery[256];
-    FormatEx( szQuery, sizeof( szQuery ), "SELECT mapid, maptier FROM "...INF_TABLE_MAPS..." WHERE mapname='%s'", g_szCurrentMap );
+    FormatEx( szQuery, sizeof( szQuery ), "SELECT mapid, maptier, maxvelocity FROM "...INF_TABLE_MAPS..." WHERE mapname='%s'", g_szCurrentMap );
     
     SQL_TQuery( g_hDB, Thrd_GetMapIdAndTier, szQuery, _, DBPrio_High );
 }
