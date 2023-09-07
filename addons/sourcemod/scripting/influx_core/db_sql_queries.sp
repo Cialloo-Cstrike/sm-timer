@@ -27,7 +27,8 @@
     CREATE TABLE IF NOT EXISTS "...INF_TABLE_MAPS..." (\
         mapid INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,\
         mapname VARCHAR(127) NOT NULL UNIQUE,\
-        maptier INT DEFAULT 0)\
+        maptier INT DEFAULT 0,\
+        maxvelocity INT DEFAULT 3500)\
     "
 
 
@@ -35,7 +36,8 @@
     CREATE TABLE IF NOT EXISTS "...INF_TABLE_MAPS..." (\
         mapid INTEGER PRIMARY KEY,\
         mapname VARCHAR(127) NOT NULL UNIQUE,\
-        maptier INT DEFAULT 0)\
+        maptier INT DEFAULT 0,\
+        maxvelocity INT DEFAULT 3500)\
     "
 
 

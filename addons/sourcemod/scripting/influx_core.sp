@@ -202,6 +202,7 @@ bool g_bLib_Hud_Draw;
 char g_szCurrentMap[128];
 int g_iCurMapId;
 int g_iCurMapTier;
+int g_iCurMapMaxVelocity;
 bool g_bNewMapId;
 bool g_bRunsLoaded = false;
 bool g_bBestTimesCached = false;
@@ -300,6 +301,7 @@ public APLRes AskPluginLoad2( Handle hPlugin, bool late, char[] szError, int err
     CreateNative( "Influx_GetClientId", Native_GetClientId );
     CreateNative( "Influx_GetCurrentMapId", Native_GetCurrentMapId );
     CreateNative( "Influx_GetCurrentMapTier", Native_GetCurrentMapTier );
+    CreateNative( "Influx_GetCurrentMapMaxVelocity", Native_GetCurrentMapMaxVelocity );
     
     CreateNative( "Influx_HasLoadedRuns", Native_HasLoadedRuns );
     CreateNative( "Influx_HasLoadedBestTimes", Native_HasLoadedBestTimes );
@@ -931,6 +933,7 @@ public void OnMapStart()
     g_bBestTimesCached = false;
     g_iCurMapId = 0;
     g_iCurMapTier = 0;
+    g_iCurMapMaxVelocity = 3500;
     
     DB_InitMap();
     

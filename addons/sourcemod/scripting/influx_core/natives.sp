@@ -14,6 +14,8 @@ public int Native_GetCurrentMapId( Handle hPlugin, int nParms ) { return g_iCurM
 
 public int Native_GetCurrentMapTier( Handle hPlugin, int nParms ) { return g_iCurMapTier; }
 
+public int Native_GetCurrentMapMaxVelocity( Handle hPlugin, int nParms ) { return g_iCurMapMaxVelocity; }
+
 public int Native_HasLoadedRuns( Handle hPlugin, int nParms ) { return g_bRunsLoaded; }
 
 public int Native_HasLoadedBestTimes( Handle hPlugin, int nParms ) { return g_bBestTimesCached; }
