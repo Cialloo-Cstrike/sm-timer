@@ -289,9 +289,9 @@ public Action Cmd_CPMenu( int client, int args )
     
     menu.AddItem( "-3", "Last created (sm_lastcreatedcp)" );
     menu.AddItem( "-2", "Last used (sm_lastusedcp)", ( g_iLastUsed[client] != -1 ) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED );
+    menu.AddItem( "-1", "Add CP (sm_addcp)\n " );
     menu.AddItem( "-4", "Previous used (sm_lastusedprecp)", ( g_iLastUsed[client] != -1 ) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED );
     menu.AddItem( "-5", "Next used (sm_lastusednextcp)", ( g_iLastUsed[client] != -1 ) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED );
-    menu.AddItem( "-1", "Add CP (sm_addcp)\n " );
     menu.AddItem( "0", "Settings\n " );
     
     char szInfo[6];
