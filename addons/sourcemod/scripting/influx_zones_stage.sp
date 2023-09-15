@@ -55,7 +55,7 @@ int g_nStages[INF_MAXPLAYERS];
 int g_iBuildingNum[INF_MAXPLAYERS];
 int g_iBuildingRunId[INF_MAXPLAYERS] = { -1, ... };
 
-bool g_bLeftStageZone[INF_MAXPLAYERS];
+// bool g_bLeftStageZone[INF_MAXPLAYERS];
 
 
 ConVar g_ConVar_ActAsCP;
@@ -203,7 +203,7 @@ public void OnClientPutInServer( int client )
     
     g_iBuildingNum[client] = 0;
     
-    g_bLeftStageZone[client] = false;
+    // g_bLeftStageZone[client] = false;
 }
 
 public Action Influx_OnSearchTelePos( float pos[3], float &yaw, int runid, int telepostype )
@@ -653,7 +653,7 @@ public void E_StartTouchPost_Stage( int ent, int activator )
     
     g_iStage[activator] = stagenum;
     
-    g_bLeftStageZone[activator] = false;
+    // g_bLeftStageZone[activator] = false;
     
     
     if ( g_bLib_Zones_CP && g_ConVar_ActAsCP.BoolValue )
@@ -690,7 +690,7 @@ public void E_EndTouchPost_Stage( int ent, int activator )
         return;
     
     
-    g_bLeftStageZone[activator] = true;
+    // g_bLeftStageZone[activator] = true;
 }
 
 stock int AddStageZone( int zoneid, int runid, int stagenum )
@@ -1119,11 +1119,11 @@ public Action Cmd_Back( int client, int args )
     }
     
     
-    if ( !g_bLeftStageZone[client] )
-    {
-        Influx_PrintToChat( _, client, "%T", "INF_LEAVEZONEFIRST", client );
-        return Plugin_Handled;
-    }
+    // if ( !g_bLeftStageZone[client] )
+    // {
+    //     Influx_PrintToChat( _, client, "%T", "INF_LEAVEZONEFIRST", client );
+    //     return Plugin_Handled;
+    // }
     
     
     int sindex = FindStageByNum( Influx_GetClientRunId( client ), g_iStage[client] );

@@ -269,10 +269,10 @@
 		"en"			"Stage {MAINCLR1}{1}{CHATCLR} does not exist!"
 	}
 	
-	"INF_LEAVEZONEFIRST"
-	{
-		"en"			"You must leave the zone first!"
-	}
+	// "INF_LEAVEZONEFIRST"
+	// {
+	// 		"en"			"You must leave the zone first!"
+	// }
 	
 	
 	
