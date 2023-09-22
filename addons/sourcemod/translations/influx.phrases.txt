@@ -32,10 +32,10 @@
 	//
 	// General
 	//
-	"INF_MUSTBERUNNING"
-	{
-		"en"			"You must be running!"
-	}
+//	"INF_MUSTBERUNNING"
+//	{
+//		"en"			"You must be running!"
+//	}
 	
 	"INF_MUSTBEALIVE"
 	{
