@@ -182,7 +182,7 @@ public Action Cmd_Practise_Pause( int client, int args )
     
     if ( Influx_GetClientState( client ) != STATE_RUNNING )
     {
-        Influx_PrintToChat( _, client, "%T", "INF_MUSTBERUNNING", client );
+        //Influx_PrintToChat( _, client, "%T", "INF_MUSTBERUNNING", client );
         return Plugin_Handled;
     }
     
@@ -209,7 +209,7 @@ stock bool PauseRun( int client )
 	
     if ( Influx_GetClientState( client ) != STATE_RUNNING )
     {
-        Influx_PrintToChat( _, client, "%T", "INF_MUSTBERUNNING", client );
+        //Influx_PrintToChat( _, client, "%T", "INF_MUSTBERUNNING", client );
         return false;
     }
     
